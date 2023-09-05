@@ -1,0 +1,95 @@
+<template>
+  <lightning-card title="Contact Manager">
+        <div class="slds-p-around_medium">
+            <lightning-button label="Add Contact" variant="brand" onclick={handleAddContact}></lightning-button>
+        </div>
+        <div class="slds-scrollable">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                    <tr class="slds-line-height_reset">
+                        <th scope="col">
+                            <div class="slds-truncate" title="Name">Name</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Email">Email</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Phone">Phone</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate" title="Account">Account</div>
+                        </th>
+                        <th scope="col">
+                            <div class="slds-truncate">Action</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template for:each={contacts} for:item="contact">
+                        <tr key={contact.Id}>
+                            <td>
+                                <div class="slds-truncate" title={contact.Name}>{contact.Name}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title={contact.Email}>{contact.Email}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title={contact.Phone}>{contact.Phone}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate" title={contact.Account.Name}>{contact.Account.Name}</div>
+                            </td>
+                            <td>
+                                <div class="slds-truncate">
+                                    <lightning-button-icon
+                                        icon-name="utility:edit"
+                                        variant="bare"
+                                        title="Edit"
+                                        alternative-text="Edit"
+                                        data-id = {contact.Id}
+                                        onclick={handleEditContact}
+                                    ></lightning-button-icon>
+                                    <lightning-button-icon
+                                        icon-name="utility:delete"
+                                        variant="bare"
+                                        title="Delete"
+                                        alternative-text="Delete"
+                                        data-id = {contact.Id}
+                                        onclick={handleDeleteContact}
+                                    ></lightning-button-icon>
+                                </div>
+                            </td>
+                        </tr>
+                    </template>
+                </tbody>
+            </table>
+        </div>
+    </lightning-card>
+
+<!--    <template if:true= {editModel}>-->
+    <c-model header="Edit Contact" modal-id="1" >
+        <div>
+            <lightning-input type="text" name="Name" label="Name" value={editContact.Name} lwc:ref="name"></lightning-input>
+            <lightning-input type="text" name="Email" label="Email" value={editContact.Email} lwc:ref="email"></lightning-input>
+            <lightning-input type="text" name="Phone" label="Phone" value={editContact.Phone} lwc:ref="phone"></lightning-input>
+            <c-custom-lookup icon-name="standard:Account" s-object-api-name="Account" label="Account"
+                             onlookupupdate={handleLookupSelection} placeholder="Search Account here..." default-record-id={editContact.AccountId}>
+            </c-custom-lookup>
+        </div>
+        <div slot="footer">
+            <lightning-button
+                    label="Close"
+                    variant="brand"
+                    onclick={handleCloseModal}
+            ></lightning-button>
+
+            <lightning-button
+                    label="Save"
+                    variant="brand"
+                    onclick={handleSaveModal}
+            ></lightning-button>
+        </div>
+    </c-model>
+<!--    </template>-->
+
+</template>
