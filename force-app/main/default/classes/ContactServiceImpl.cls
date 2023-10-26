@@ -13,6 +13,7 @@ public with sharing class ContactServiceImpl implements IContactService {
     public List<Contact> createContacts(List<Contact> contacts) {
         fflib_ISObjectUnitOfWork unitofWork = Application.uow.newInstance();
         unitofWork.registerNew(contacts);
+
         unitofWork.commitWork();
         return contacts;
     }
@@ -30,4 +31,5 @@ public with sharing class ContactServiceImpl implements IContactService {
         unitofWork.commitWork();
         return contacts;
     }
+
 }

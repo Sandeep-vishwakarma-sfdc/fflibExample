@@ -16,11 +16,13 @@ public with sharing class Application {
     });
 
     public static final fflib_Application.SelectorFactory selector = new fflib_Application.SelectorFactory(new Map<SObjectType,Type>{
-            Contact.SObjectType => ContactsSelector.class
+            Contact.SObjectType => ContactsSelector.class,
+            Account.SObjectType => AccountSelector.class
     });
 
     public static final fflib_Application.DomainFactory domain = new fflib_Application.DomainFactory(selector,new Map<SObjectType,Type>{
-            Contact.SObjectType => Contacts.class
+            Contact.SObjectType => Contacts.class,
+            PriceList.SobjecType => PriceListDomain.class
     });
 }
 

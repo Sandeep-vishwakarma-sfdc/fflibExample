@@ -28,9 +28,10 @@ public with sharing class ContactsSelector extends fflib_SObjectSelector{
         return Database.query(
                 newQueryFactory().selectField(Contact.Title)
                         .selectField('AccountId.Name')
-                        .setCondition('Name !=null')
+                        .setCondition('LastName !=null')
                         .setLimit(10)
                         .toSOQL()
         );
     }
+
 }

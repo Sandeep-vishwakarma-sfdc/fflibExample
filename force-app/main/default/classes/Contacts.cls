@@ -2,7 +2,7 @@
  * Created by user on 8/28/2023.
  */
 
-public with sharing class Contacts extends fflib_SObjectDomain{
+public with sharing class Contacts extends fflib_SObjectDomain implements IContactDomain{
 
     public Contacts(List<Contact> records){
         super(records);
@@ -25,5 +25,9 @@ public with sharing class Contacts extends fflib_SObjectDomain{
         public fflib_SObjectDomain construct(List<SObject> sObjectList) {
             return new Contacts(sObjectList);
         }
+    }
+
+    public void someTriggerMethod() {
+        System.debug('Some code');
     }
 }
